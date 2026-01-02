@@ -9,6 +9,7 @@
   "homepage": "https://github.com/camptocamp/ogc-client",
   "files": [
     "dist/",
+    "dist-bundled/",
     "src/"
   ],
   "type": "module",
@@ -21,6 +22,11 @@
       "import": "./dist/dist-node.js",
       "browser": "./dist/index.js",
       "default": "./dist/dist-node.js"
+    },
+    "./bundled": {
+      "types": "./dist-bundled/index.d.ts",
+      "browser": "./dist-bundled/index.js",
+      "default": "./dist-bundled/index.js"
     }
   },
   "dependencies": {
@@ -77,8 +83,9 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "build": "rm -rf dist && npm run build:worker && npm run build:node && npm run build:browser",
+    "build": "rm -rf dist dist-bundled && npm run build:worker && npm run build:node && npm run build:browser && npm run build:browser-vite",
     "build:browser": "esbuild $(find ./src -name \"*.ts\" -type f -not -path '*worker/index.ts' -not -path '*.spec.ts') --outdir=./dist --platform=neutral --format=esm --sourcemap",
+    "build:browser-vite": "esbuild $(find ./src -name \"*.ts\" -type f -not -path '*.spec.ts') --outdir=./dist-bundled --platform=neutral --format=esm --sourcemap",
     "build:node": "vite build --config vite.node-config.js",
     "build:worker": "vite build --config vite.worker-config.js",
     "prepublishOnly": "npm run typecheck && npm test && npm run build",
