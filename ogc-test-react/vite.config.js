@@ -7,12 +7,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@camptocamp/ogc-client/bundled': path.resolve(__dirname, 'node_modules/@camptocamp/ogc-client/dist/index.js'),
+      '@camptocamp/ogc-client/bundled': path.resolve(__dirname, 'node_modules/@camptocamp/ogc-client/dist-bundled/index.js')
       //'@camptocamp/ogc-client': path.resolve(__dirname, 'node_modules/@camptocamp/ogc-client/dist/index.js'),
       '@rgrove/parse-xml': path.resolve(__dirname, 'node_modules/@rgrove/parse-xml/dist/index.js'),
     },
   },
   optimizeDeps: {
-   // exclude: ['@camptocamp/ogc-client'],
+    exclude: ['@camptocamp/ogc-client'],
   },
 })
